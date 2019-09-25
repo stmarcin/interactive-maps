@@ -19,10 +19,7 @@ Acc <- Acc %>%
       mutate(key = str_replace(key, "PT_Avg", "PT average times")) %>% 
       
       # reorder factor levels
-      mutate(key = fct_reorder(key, value)) %>% 
-      
-      # round number of jobs (thousands)
-      mutate(value = round((value/10000), 0)*10)
+      mutate(key = fct_reorder(key, value))
 
 # prepare a plot
  Acc %>% 
