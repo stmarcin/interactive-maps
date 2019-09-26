@@ -15,20 +15,31 @@ Free.Flow <- merge(
       by.x = "TAZ_Madr_1", by.y = "Or") 
 
 tm_shape(Free.Flow) +
-      tm_polygons("FreeFlow", # column used for cartogram
-            title = "Accessible jobs<br>(thous.)", # title of the legend
-            alpha = 0.6, # transparency of thematic layer
-            n = 15, # number of classes of cartogram
-            border.col = "#990099", # color of border of transport zones
-            border.alpha = 0.02, # transparency level of the border
-            id = "TAZ_Madrid", # id which is diplayed in popup window
-            palette = hcl.colors(18, palette = "Inferno", # color palette
-                  alpha = NULL, rev = FALSE, fixup = TRUE)[3:18], # excluded the darkest colors
-            popup.vars=c(
+   tm_polygons("FreeFlow",
+               
+               # popup definition
+               popup.vars=c(
                   "Accessible_jobs: "="K.FreeFlow",
-                  "Population: " = "POP2017")
-            ) +
-      tm_layout(title = "Accessibility to jobs<br>Model: Car free flow speeds")
+                  "Population: " = "POP2017"),
+               id = "TAZ_Madrid",
+               
+               # transparency, number of classes and palette
+               alpha = 0.6,
+               n = 16,
+               palette = hcl.colors(18, palette = "Inferno")[3:18],
+               
+               # border definition: color and transparency
+               border.col = "#990099",
+               border.alpha = 0.05, 
+               
+               # title of the legend
+               title = "Accessible jobs<br>(thous.)"
+   ) +
+   
+   # map title 
+   tm_layout(title = "Accessibility to jobs<br>Model: Car free flow speeds")
+
+
 
 tmap_last() %>% 
       tmap_save("Madrid_accessibility_map.html")
